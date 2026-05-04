@@ -2,13 +2,18 @@ from rest_framework import serializers
 
 from blog.models import Category, Post
 
-
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = ['id', 'name']
-
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = ['title', 'body', 'category']
+
+class CategorySerializer(serializers.ModelSerializer):
+    posts = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'posts']
+
+    def get_posts(self, obj):
+        posts = obj.post_set.all()
+        return PostSerializer(posts, many=True).data
