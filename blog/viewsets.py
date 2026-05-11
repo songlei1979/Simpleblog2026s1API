@@ -1,12 +1,13 @@
 from logging import raiseExceptions
 
+from django.contrib.auth.models import User
 from django.http import Http404
 from rest_framework import viewsets, permissions
 from rest_framework.permissions import AllowAny
 
 from blog.models import Category, Post
 from blog.permissions import IsAuthorOrReadOnly
-from blog.serializers import CategorySerializer, PostSerializer
+from blog.serializers import CategorySerializer, PostSerializer, UserSerilizer
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -37,4 +38,8 @@ class PostViewSet(viewsets.ModelViewSet):
         if self.request.user.is_superuser:
             serializer.save(author=self.request.user)
         serializer.save(author=self.request.user)
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerilizer
 

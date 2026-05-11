@@ -3,7 +3,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.routers import DefaultRouter
 
 from blog.views import home, category_list, category_create, category_detail_update, category_detail_delete
-from blog.viewsets import CategoryViewSet, PostViewSet
+from blog.viewsets import CategoryViewSet, PostViewSet, UserViewSet
 
 router = DefaultRouter()
 router.register(r'categories_router',
@@ -12,6 +12,9 @@ router.register(r'categories_router',
 router.register(r'posts_router',
                 PostViewSet,
                 basename='posts')
+router.register(r'users_router',
+                UserViewSet,
+                basename='users')
 urlpatterns = [
     path('categories/',
          category_list,
