@@ -5,7 +5,7 @@ from blog.models import Category, Post
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['title', 'body', 'category']
+        fields = ['title', 'body', 'category', 'author', 'id']
 
 class CategorySerializer(serializers.ModelSerializer):
     posts = serializers.SerializerMethodField()

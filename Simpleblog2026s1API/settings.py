@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     "blog",
     "rest_framework",
     "rest_framework.filters",
-    "rest_framework.authtoken"
+    "rest_framework.authtoken",
+    "ckeditor"
 ]
 
 MIDDLEWARE = [
